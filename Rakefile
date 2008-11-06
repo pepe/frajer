@@ -19,8 +19,10 @@ namespace :app do
   task :install do
     Rake::Task['app:install:create_data_directory'].invoke
     Rake::Task['app:install:create_database'].invoke
-    Rake::Task['app:install:create_sample_article'].invoke
-    Rake::Task['app:install:create_sample_comment'].invoke
+    if CONFIG['wanna_samples']
+      Rake::Task['app:install:create_sample_article'].invoke
+      Rake::Task['app:install:create_sample_comment'].invoke
+    end
     puts "* Starting application in development mode"
     Rake::Task['app:start'].invoke
   end
@@ -45,7 +47,8 @@ namespace :app do
       Marley::Comment.create( :author  => 'John Doe',
                             :email   => 'john@example.com',
                             :body    => 'Lorem ipsum dolor sit amet',
-                            :post_id => 'test-article' )
+                            :post_id => 'test-article',
+                            :url => 'john.example.com' )
     end
     task :open_in_browser do
       `open http://localhost:4567` if RUBY_PLATFORM =~ /darwin/
@@ -62,6 +65,11 @@ namespace :app do
     exec "cd app/test; ruby marley_test.rb"
   end
   
+  desc "Clean after something wrong happened"
+  task :clean do
+    puts "* Removing data directory from " + Marley::DATA_DIRECTORY
+    FileUtils.rm_rf( Marley::DATA_DIRECTORY )
+  end
 end
 
 namespace :data do

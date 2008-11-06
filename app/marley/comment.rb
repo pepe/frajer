@@ -28,10 +28,13 @@ module Marley
       }
     end
     
+    # checks if comment isn't spam
     def check_spam
-      self.checked = true
-      self.spam = !::Antispammer.spam?(akismet_attributes)
-      true # return true so it doesn't stop save
+      unless CONFIG['love_spam']
+        self.checked = true
+        self.spam = !::Antispammer.spam?(akismet_attributes)
+        true # return true so it doesn't stop save
+      end
     end
 
     # TODO : Unit test for this
