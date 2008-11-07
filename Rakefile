@@ -70,6 +70,14 @@ namespace :app do
     puts "* Removing data directory from " + Marley::DATA_DIRECTORY
     FileUtils.rm_rf( Marley::DATA_DIRECTORY )
   end
+
+  desc "Create new article"
+  task :create_article, :article_name do |t, args|
+    puts "* Creating article #{args.article_name}"
+    new_dir = File.join(Marley::DATA_DIRECTORY, args.article_name)
+    FileUtils.cp_r( File.join(File.dirname(__FILE__), 'app', 'templates', 'basic-template'), new_dir )
+    FileUtils.mv(File.join(new_dir, 'basic-template'), File.join(new_dir, args.article_name + '.txt'))
+  end
 end
 
 namespace :data do
