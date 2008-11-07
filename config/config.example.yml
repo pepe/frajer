@@ -9,7 +9,7 @@ ga_code: "{REPLACE WITH YOUR GOOGLE ANALYTICS CODE OR LEAVE EMPTY}"
 # Set this relatively to application main ("marley") directory
 data_directory: "../../data"
 
-# Uncomment if you love spam. Then all below will be ignored
+# Uncomment if you love spam, then all below is just tears in the rain
 # love_spam: true
  
 # See http://soakedandsoaped.com/articles/2006/10/01/how-to-protect-a-rails-application-against-spam-with-akismet

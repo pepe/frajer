@@ -15,16 +15,26 @@
 
 
   <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" />
-  <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
 	
 </head>
 
 <body>
 
+  <div id='header'>
+    <blockquote cite="http://www.dedicatio.com/authors/Marley,Bob">
+      <p>The good times of today are the sad thoughts of tomorrow. <a href="http://www.dedicatio.com/authors/Marley,Bob">— Bob Marley</a></p>
+    </blockquote>
+    
+    <h1><%= CONFIG['blog']['title'] %></h1>
+  </div> <!-- /header -->
   <div class="container">
+
   <%= yield %>
   </div><!-- /container -->
 
+  <div id='footer'>&copy;  2008 In peace and love pepe. Powered by <a href='http://github.com/bmizerany/sinatra'>Sinatra</a> and <a href='http://github.com/karmi/marley'>Marley</a>, that's why sound is perfect.</div>
+
+  <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
   <% if CONFIG['ga_code'] && Sinatra.env == :production %>
   <script type="text/javascript">
   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -35,6 +45,5 @@
   pageTracker._trackPageview();
   </script>
   <% end %>
-
 </body>
 </html>
